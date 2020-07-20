@@ -11,12 +11,13 @@ public class IssueMessageUtils {
 	}
 	
 	private static List<String> infoMessages;
+	
+	private static List<String> debugMessages;
 
 	public static String getInfoMsg() {
 
 		if (infoMessages == null) {
 			infoMessages = new ArrayList<>();
-			infoMessages.add("Serving template from cache for screen: services-pager-template-screen");
 			infoMessages.add("specdrive.sso.agent.SSOAgentFilter - project name is =/My_Dashboard");
 			infoMessages.add("specdrive.dsg.managed.beans.MPayBusiness - TOP UP PAY CARD payable=20");
 			infoMessages.add("specdrive.bus.managed.beans.MPayBusiness - Post Paid Services payable=486.42");
@@ -43,6 +44,23 @@ public class IssueMessageUtils {
 		}
 
 		return getRandomMsg(infoMessages);
+
+	}
+	
+	
+	public static String getDebugMsg() {
+
+		if (debugMessages == null) {
+			debugMessages = new ArrayList<>();
+			debugMessages.add("org.opensaml.xml.XMLConfigurator - Loading configuration from XML Document");
+			debugMessages.add("org.opensaml.xml.XMLConfigurator - Schema validating configuration Document");
+			debugMessages.add("org.opensaml.xml.XMLConfigurator - Configuration document validated");
+			debugMessages.add("org.opensaml.xml.XMLConfigurator - Preparing to load ObjectProviders");
+			debugMessages.add("org.opensaml.xml.XMLConfigurator - Initializing object provider");
+			
+		}
+
+		return getRandomMsg(debugMessages);
 
 	}
 

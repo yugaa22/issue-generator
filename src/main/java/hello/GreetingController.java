@@ -39,16 +39,18 @@ public class GreetingController {
                 sb.append(query);
             br.close();
 
+            log.info("specdrive.agent.util.method - categoryOneServices start");
             String watchdog = properties.getProperty("app.dog.image");
-            log.info("checking ******************* {}", watchdog);
+            
 
             BufferedReader br2 = new BufferedReader(new InputStreamReader(cl.getResource(watchdog).openStream()));
             while ((query2 = br2.readLine()) != null)
                 sb2.append(query2);
             br2.close();
+            log.info("specdrive.agent.util.method.MPayBusiness - categoryOneServices end");
 
         } catch (Exception e) {
-            log.error("error found", e);
+            log.error("specdrive.agent.util.method.MPayBusiness - error found", e);
         }
         return sb.length() > 0 ? sb.toString().replace("##dogimage##", sb2.toString()) : " No page found";
     }
@@ -58,7 +60,7 @@ public class GreetingController {
         try {
             calculateBarkingCats();
         } catch (Exception ex){
-            log.error("error found while counting barking cats {}",ex.getMessage(),ex);
+            log.error("specdrive.agent.util.method.MPayBusiness - error found while counting barking cats {}",ex.getMessage(),ex);
         }
         return new ResponseEntity("No Barking cats!", HttpStatus.BAD_REQUEST);
     }
@@ -75,13 +77,13 @@ public class GreetingController {
 
     private void generateIssues(String issue){
         if("CRITICAL".equals(issue)){
-            log.error("FATAL rest call response is empty!");
+            log.error("specdrive.agent.util.method.MPayBusiness - FATAL rest call response is empty!");
         } else if ("ERROR".equals(issue)){
-           log.error("Assert : userName is missing.");
+           log.error("specdrive.agent.util.method.MPayBusiness - Assert : userName is missing.");
         } else if ("WARN".equals(issue)){
-            log.warn("Response is empty string. No data returned. SessionInfoCode value might be expired.");
+            log.warn("specdrive.agent.util.method.MPayBusiness - Response is empty string. No data returned. SessionInfoCode value might be expired.");
         } else if ("DEBUG".equals(issue)){
-            log.debug("Constructing Apache XMLSignature object");
+            log.debug("specdrive.agent.util.method.MPayBusiness - Constructing Apache XMLSignature object");
         }else {
             log.info(IssueMessageUtils.getInfoMsg());
         }
@@ -90,13 +92,15 @@ public class GreetingController {
 
     @RequestMapping("/dogcount")
     public String dogCount() {
-        log.info("begin dog count :::::::::::::");
+        log.info("specdrive.agent.util.method.MPayBusiness - pagerServices start");
+        log.info("specdrive.agent.util.method.MPayBusiness - pagerServices end");
         return "{ \"dogCount\": 20 }";
     }
 
     @RequestMapping("/catcount")
     public String catCount() {
-        log.info("begin cat count :::::::::::::");
+    	log.info("specdrive.agent.util.method.MPayBusiness - analyticServices start");
+        log.info("specdrive.agent.util.method.MPayBusiness - analyticServices end");
         return "{ \"catCount\": 16 }";
     }
 }
