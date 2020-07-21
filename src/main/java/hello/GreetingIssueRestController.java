@@ -1,11 +1,7 @@
 package hello;
 
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
 
-import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.http.HttpStatus;
@@ -36,22 +32,22 @@ public class GreetingIssueRestController {
 	
 	private void generateLogs(String type) {
         if("CRITICAL".equalsIgnoreCase(type)){
-        	log.error("specdrive.bus.managed.beans.MPayBusiness - FATAL rest call response is empty!");
+        	log.error("issuegen.bus.managed.beans.MPayBusiness - FATAL rest call response is empty!");
             return;
         }
         
         if ("DEBUG".equalsIgnoreCase(type)){
-            log.debug("specdrive.bus.managed.beans.MPayBusiness - Constructing Apache XMLSignature object");
+            log.debug(IssueMessageUtils.getDebugMsg());
             return;
         }
         
         if ("ERROR".equalsIgnoreCase(type)){
-           log.error("specdrive.bus.managed.beans.MPayBusiness - Assert : userName is missing.");
+           log.error("issuegen.bus.managed.beans.MPayBusiness - Assert : userName is missing.");
            return;
         }
         
         if ("WARN".equalsIgnoreCase(type)){
-            log.warn("specdrive.bus.managed.beans.MPayBusiness - Response is empty string. No data returned. SessionInfoCode value might be expired.");
+            log.warn("issuegen.bus.managed.beans.MPayBusiness - Response is empty string. No data returned. SessionInfoCode value might be expired.");
             return;
         }  
           
@@ -61,57 +57,57 @@ public class GreetingIssueRestController {
 	private void generateIssues(String type){
         
         if("OUT_OF_MEMORY".equalsIgnoreCase(type)) {
-        	log.error("specdrive.bus.managed.beans.MPayBusiness - memory execeded", new OutOfMemoryError("GC overhead limit exceeded"));
+        	log.error("issuegen.bus.managed.beans.MPayBusiness - memory execeded", new OutOfMemoryError("GC overhead limit exceeded"));
         	return;
         }
         
         if("STACK_OVERFLOW_ERROR".equalsIgnoreCase(type)) {
-        	log.error("specdrive.bus.managed.beans.MPayBusiness - stack overflow error occured", new StackOverflowError("Stack overflow occured"));
+        	log.error("issuegen.bus.managed.beans.MPayBusiness - stack overflow error occured", new StackOverflowError("Stack overflow occured"));
         	return;
         }
         
         if("FILE_NOT_FOUND".equalsIgnoreCase(type)) {
-        	log.error("specdrive.bus.managed.beans.MPayBusiness - File not found", new FileNotFoundException("File not found"));
+        	log.error("issuegen.bus.managed.beans.MPayBusiness - File not found", new FileNotFoundException("File not found"));
         	return;
         }
         
         if("ARRAY_INDEX_OUT_OF_BOUND".equalsIgnoreCase(type)) {
-        	log.error("specdrive.bus.managed.beans.MPayBusiness - Array index out of range", new ArrayIndexOutOfBoundsException(6));
+        	log.error("issuegen.bus.managed.beans.MPayBusiness - Array index out of range", new ArrayIndexOutOfBoundsException(6));
         	return;
         }
         
         if("NULL_POINTER".equalsIgnoreCase(type)) {
-        	log.error("specdrive.bus.managed.beans.MPayBusiness - Null pointer exception occured", new NullPointerException());
+        	log.error("issuegen.bus.managed.beans.MPayBusiness - Null pointer exception occured", new NullPointerException());
         	return;
         }
         
         if("STRING_INDEX_OUT_OF_BOUND".equalsIgnoreCase(type)) {
-        	log.error("specdrive.bus.managed.beans.MPayBusiness - String index out of range", new StringIndexOutOfBoundsException("String index out of range"));
+        	log.error("issuegen.bus.managed.beans.MPayBusiness - String index out of range", new StringIndexOutOfBoundsException("String index out of range"));
         	return;
         }
         
         if("NO_CLASS_DEF_FOUND".equalsIgnoreCase(type)) {
-        	log.error("specdrive.bus.managed.beans.MPayBusiness - No class def found", new NoClassDefFoundError("No class def found A"));
+        	log.error("issuegen.bus.managed.beans.SSOAgentFilter - No class def found", new NoClassDefFoundError("No class def found A"));
         	return;
         }
         
         if("NO_SUCH_METHOD_FOUND".equalsIgnoreCase(type)) {
-        	log.error("specdrive.bus.managed.beans.MPayBusiness - No such method found", new NoSuchMethodError("Method not found"));
+        	log.error("issuegen.bus.managed.beans.MPayBusiness - No such method found", new NoSuchMethodError("Method not found"));
         	return;
         }
         
         if("NUMBER_FORMAT".equalsIgnoreCase(type)) {
-        	log.error("specdrive.bus.managed.beans.MPayBusiness - Number format exception occured", new NumberFormatException("Number format exception"));
+        	log.error("issuegen.bus.managed.beans.JourneyPlannerMB - Number format exception occured", new NumberFormatException("Number format exception"));
         	return;
         }
         
         if("ILLEGAL_ARGUMENT".equalsIgnoreCase(type)) {
-        	log.error("specdrive.bus.managed.beans.MPayBusiness - Illegal argument exception occured", new IllegalArgumentException("Illegal argument exception"));
+        	log.error("issuegen.bus.managed.beans.MPayBusiness - Illegal argument exception occured", new IllegalArgumentException("Illegal argument exception"));
         	return;
         }
         
         if("CLASS_NOT_FOUND".equalsIgnoreCase(type)){
-        	log.error("specdrive.bus.managed.beans.MPayBusiness - class not found in classpath", new ClassNotFoundException("class not found in classpath"));
+        	log.error("issuegen.bus.managed.beans.MPayBusiness - class not found in classpath", new ClassNotFoundException("class not found in classpath"));
         } 
     }
 	
@@ -124,17 +120,17 @@ public class GreetingIssueRestController {
 	private void generateWarning(String type) {
 		
 		if("GARBAGE_COLLECTION".equalsIgnoreCase(type)) {
-			log.warn("specdrive.bus.managed.beans.MPayBusiness - Garbage collection takes too long");
+			log.warn("issuegen.bus.managed.beans.JourneyPlannerMB - Garbage collection takes too long");
 			return;
 		}
 		
 		if("DEPRECATED_API".equalsIgnoreCase(type)) {
-			log.warn("specdrive.bus.managed.beans.MPayBusiness - API WarningLogs is deprecated. It will be removed in future versions, use generateWarning API instead");
+			log.warn("issuegen.bus.managed.beans.MicroAppResponse - API WarningLogs is deprecated. It will be removed in future versions, use generateWarning API instead");
 			return;
 		}
 		
 		if("VERSION".equalsIgnoreCase(type)) {
-			log.warn("specdrive.bus.managed.beans.MPayBusiness - Future versions will require Java 13; your Java version does not meet this requirement");
+			log.warn("issuegen.bus.managed.beans.MPayBusiness - Future versions will require Java 13; your Java version does not meet this requirement");
 		}
 	}
 	
