@@ -4,6 +4,7 @@ package hello;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.Properties;
+import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -25,7 +26,7 @@ public class GreetingController {
     static Properties properties = proUtil.getInstance();
 
     @RequestMapping("/greeting")
-    public String greeting(@RequestParam(value = "name", defaultValue = "World") String name) {
+    public String greeting(@RequestParam(value = "delay", defaultValue = "0") Integer delay) {
 
         String query;
         StringBuffer sb = new StringBuffer();
@@ -39,6 +40,14 @@ public class GreetingController {
                 sb.append(query);
             br.close();
 
+            if(delay > 0) {
+            	Random r = new Random();
+            	delay = r.nextInt((delay - delay/2) + 1) + delay/2;
+            }
+            
+           Thread.sleep(delay);
+            
+            
             log.info("issuegen.agent.util.method - categoryOneServices start");
             String watchdog = properties.getProperty("app.dog.image");
             

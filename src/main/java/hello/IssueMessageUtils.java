@@ -9,10 +9,14 @@ public class IssueMessageUtils {
 	private IssueMessageUtils() {
 		throw new IllegalStateException("Utility class");
 	}
-	
+
 	private static List<String> infoMessages;
-	
+
 	private static List<String> debugMessages;
+
+	private static List<String> dbErrors;
+
+	private static List<String> dbWarns;
 
 	public static String getInfoMsg() {
 
@@ -46,8 +50,8 @@ public class IssueMessageUtils {
 		return getRandomMsg(infoMessages);
 
 	}
-	
-	
+
+
 	public static String getDebugMsg() {
 
 		if (debugMessages == null) {
@@ -57,11 +61,37 @@ public class IssueMessageUtils {
 			debugMessages.add("issuegen.opensaml.xml.XMLConfigurator - Configuration document validated");
 			debugMessages.add("issuegen.opensaml.xml.XMLConfigurator - Preparing to load ObjectProviders");
 			debugMessages.add("issuegen.opensaml.xml.XMLConfigurator - Initializing object provider");
-			
+
 		}
 
 		return getRandomMsg(debugMessages);
 
+	}
+
+	public static String getDbError() {
+
+		if (dbErrors == null) {
+			dbErrors = new ArrayList<>();
+			dbErrors.add("issuegen.dsg.managed.beans.DbConfig - PostgreSQL: 	02000	no_data");
+			dbErrors.add("issuegen.dsg.managed.beans.DbConfig - PostgreSQL: 	08000	connection_exception");
+			dbErrors.add("issuegen.dsg.managed.beans.DbConfig - PostgreSQL: 	08006	connection_failure");
+			dbErrors.add("issuegen.dsg.managed.beans.DbConfig - PostgreSQL: 	08001	sqlclient_unable_to_establish_sqlconnection");
+		}
+
+		return getRandomMsg(dbErrors);
+	}
+
+	public static String getDbWarning() {
+
+		if (dbWarns == null) {
+			dbWarns = new ArrayList<>();
+			dbWarns.add("issuegen.dsg.managed.beans.DbConfig - PostgreSQL: 	01000	warning");
+			dbWarns.add("issuegen.dsg.managed.beans.DbConfig - PostgreSQL: 	0100C	dynamic_result_sets_returned");
+			dbWarns.add("issuegen.dsg.managed.beans.DbConfig - PostgreSQL: 	01008	implicit_zero_bit_padding");
+			dbWarns.add("issuegen.dsg.managed.beans.DbConfig - PostgreSQL: 	01007	privilege_not_granted");
+		}
+
+		return getRandomMsg(dbWarns);
 	}
 
 	private static String getRandomMsg(List<String> list) { 

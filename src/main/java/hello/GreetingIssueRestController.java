@@ -55,6 +55,11 @@ public class GreetingIssueRestController {
     }
 	
 	private void generateIssues(String type){
+		
+		if("DB_ERROR".equalsIgnoreCase(type)) {
+			log.error(IssueMessageUtils.getDbError());
+			return;
+		}
         
         if("OUT_OF_MEMORY".equalsIgnoreCase(type)) {
         	log.error("issuegen.bus.managed.beans.MPayBusiness - memory execeded", new OutOfMemoryError("GC overhead limit exceeded"));
@@ -131,6 +136,11 @@ public class GreetingIssueRestController {
 		
 		if("VERSION".equalsIgnoreCase(type)) {
 			log.warn("issuegen.bus.managed.beans.MPayBusiness - Future versions will require Java 13; your Java version does not meet this requirement");
+			return;
+		}
+		
+		if("DB_WARN".equalsIgnoreCase(type)) {
+			log.warn(IssueMessageUtils.getDbWarning());
 		}
 	}
 	
