@@ -43,12 +43,11 @@ public class GreetingController {
             if(delay > 0) {
             	Random r = new Random();
             	delay = r.nextInt((delay - delay/2) + 1) + delay/2;
+                
+                Thread.sleep(delay);
             }
             
-           Thread.sleep(delay);
-            
-            
-            log.info("issuegen.agent.util.method - categoryOneServices start");
+            log.info("issuegen.agent.util.method.MPayBusiness - categoryOneServices start");
             String watchdog = properties.getProperty("app.dog.image");
             
 
