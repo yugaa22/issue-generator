@@ -2,7 +2,7 @@ FROM opsmx11/java:14.04-openjdk-8-jdk
 ## restapp port ####
 ENV server_port=8088
 RUN apt-get update && apt-get install stress-ng -y
-COPY /target/issuegen-0.1.jar /opt/issuegen-0.1.jar
+COPY /build/libs/issuegen-0.1.jar /opt/issuegen-0.1.jar
 COPY dockerrun.sh /usr/local/bin/dockerrun.sh
 RUN chmod +x /usr/local/bin/dockerrun.sh
 ###### for newrelic-agent only
