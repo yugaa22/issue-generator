@@ -1,6 +1,7 @@
-package hello;
+package com.opsmx.issuegen;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
@@ -17,6 +18,34 @@ public class IssueMessageUtils {
 	private static List<String> dbErrors;
 
 	private static List<String> dbWarns;
+	
+	private static List<String> commonWords;
+		
+	public static final String CRITICAL = "CRITICAL";
+	public static final String ERROR = "ERROR";
+	public static final String DEBUG = "DEBUG";
+	public static final String WARN = "WARN";
+	
+	static {
+		commonWords = new ArrayList<>();
+		commonWords.add("Internal Server Error occured");
+		commonWords.add("while");
+		commonWords.add("trying to");
+		commonWords.add("load");
+		commonWords.add("app config  from path");
+		commonWords.add("initialized");
+		commonWords.add("application");
+		commonWords.add("creation of");
+		commonWords.add("securerandom instance");
+		commonWords.add("session id");
+		commonWords.add("generation");
+		commonWords.add("schema validating");
+		commonWords.add("authorization");
+		commonWords.add("APPConfig");
+		commonWords.add("context");
+		commonWords.add("project");
+		
+	}
 
 	public static String getInfoMsg() {
 
@@ -51,7 +80,6 @@ public class IssueMessageUtils {
 
 	}
 
-
 	public static String getDebugMsg() {
 
 		if (debugMessages == null) {
@@ -67,6 +95,7 @@ public class IssueMessageUtils {
 		return getRandomMsg(debugMessages);
 
 	}
+	
 
 	public static String getDbError() {
 
@@ -96,5 +125,27 @@ public class IssueMessageUtils {
 
 	private static String getRandomMsg(List<String> list) { 
 		return list.get(new Random().nextInt(list.size())); 
+	}
+	
+	public static String getErrorMsg() {
+		
+	     return getSuffle("IOExeception");
+	}
+	
+	private static String getSuffle(String value) {
+		
+		commonWords.add(value);
+		Collections.shuffle(commonWords);
+		
+		
+		StringBuilder sb = new StringBuilder(commonWords.size());
+		for (String s : commonWords) {
+			sb.append(s);
+			sb.append(" ");
+		}
+		
+		commonWords.remove(value);
+		
+		  return sb.toString();
 	}
 }

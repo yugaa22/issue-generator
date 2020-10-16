@@ -1,4 +1,4 @@
-package hello;
+package com.opsmx.issuegen;
 
 public class Greeting {
 

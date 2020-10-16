@@ -1,4 +1,4 @@
-package hello;
+package com.opsmx.issuegen;
 
 import java.io.IOException;
 import java.io.InputStream;

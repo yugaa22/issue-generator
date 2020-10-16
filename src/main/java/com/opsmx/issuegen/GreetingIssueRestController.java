@@ -1,4 +1,4 @@
-package hello;
+package com.opsmx.issuegen;
 
 import java.io.FileNotFoundException;
 
@@ -11,42 +11,74 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import lombok.extern.log4j.Log4j2;
+import lombok.extern.slf4j.Slf4j;
 
-@Log4j2
+@Slf4j
 @CrossOrigin
 @RestController
 public class GreetingIssueRestController {
-			
+				
+	private static final String OPERATION_DONE_SUCCESSFULLY = "Operation done successfully";
+
 	@GetMapping("/logs")
 	public ResponseEntity<String> logs(HttpServletRequest httpServletRequest, @RequestParam("type") String type) {
 		generateLogs(type);
-		return new ResponseEntity<>("Operation done successfully",HttpStatus.OK);
+		return new ResponseEntity<>(OPERATION_DONE_SUCCESSFULLY,HttpStatus.OK);
 	}
 
 	@GetMapping("/issue")
 	public ResponseEntity<String> issueLogs(HttpServletRequest httpServletRequest, @RequestParam("type") String type){		
 		generateIssues(type);
-		return new ResponseEntity<>("Operation done successfully",HttpStatus.OK);
+		return new ResponseEntity<>(OPERATION_DONE_SUCCESSFULLY,HttpStatus.OK);
 	}
 	
+	@GetMapping("/customlog")
+	public ResponseEntity<String> customLogs(HttpServletRequest httpServletRequest, @RequestParam("type") String type, @RequestParam("msg") String msg) {
+		customLogs(type, msg);
+		return new ResponseEntity<>(OPERATION_DONE_SUCCESSFULLY,HttpStatus.OK);
+	}
+	
+	private void customLogs(String type, String msg) {
+        if(IssueMessageUtils.CRITICAL.equalsIgnoreCase(type)){
+        	log.error("issuegen.bus.managed.beans.LogUtils - FATAL {}", msg);
+            return;
+        }
+        
+        if (IssueMessageUtils.DEBUG.equalsIgnoreCase(type)){
+            log.debug("issuegen.bus.managed.beans.LogUtils - {}", msg);
+            return;
+        }
+        
+        if (IssueMessageUtils.ERROR.equalsIgnoreCase(type)){
+           log.error("issuegen.bus.managed.beans.LogUtils - {}", msg);
+           return;
+        }
+        
+        if (IssueMessageUtils.WARN.equalsIgnoreCase(type)){
+            log.warn("issuegen.bus.managed.beans.LogUtils - {}", msg);
+            return;
+        }  
+          
+        log.info("issuegen.bus.managed.beans.LogUtils - {}", msg);
+    }
+	
 	private void generateLogs(String type) {
-        if("CRITICAL".equalsIgnoreCase(type)){
+        if(IssueMessageUtils.CRITICAL.equalsIgnoreCase(type)){
         	log.error("issuegen.bus.managed.beans.MPayBusiness - FATAL rest call response is empty!");
             return;
         }
         
-        if ("DEBUG".equalsIgnoreCase(type)){
+        if (IssueMessageUtils.DEBUG.equalsIgnoreCase(type)){
             log.debug(IssueMessageUtils.getDebugMsg());
             return;
         }
         
-        if ("ERROR".equalsIgnoreCase(type)){
-           log.error("issuegen.bus.managed.beans.MPayBusiness - Assert : userName is missing.");
+        if (IssueMessageUtils.ERROR.equalsIgnoreCase(type)){
+           log.error("issuegen.agent.util.method.MPayBusiness - Assert : userName is missing.");
            return;
         }
         
-        if ("WARN".equalsIgnoreCase(type)){
+        if (IssueMessageUtils.WARN.equalsIgnoreCase(type)){
             log.warn("issuegen.bus.managed.beans.MPayBusiness - Response is empty string. No data returned. SessionInfoCode value might be expired.");
             return;
         }  
@@ -119,7 +151,7 @@ public class GreetingIssueRestController {
 	@GetMapping("/warn")
 	public ResponseEntity<String> warningLogs(HttpServletRequest httpServletRequest, @RequestParam("type") String issue){		
 		generateWarning(issue);
-		return new ResponseEntity<>("Operation done successfully",HttpStatus.OK);
+		return new ResponseEntity<>(OPERATION_DONE_SUCCESSFULLY,HttpStatus.OK);
 	}
 	
 	private void generateWarning(String type) {
@@ -143,16 +175,4 @@ public class GreetingIssueRestController {
 			log.warn(IssueMessageUtils.getDbWarning());
 		}
 	}
-	
-//	OutOfMemoryError
-//	StackOverflowError
-//	ClassNotFoundException
-//	FileNotFoundException
-//	ArrayIndexOutOfBounds
-//	NullPointerException
-//	StringIndexOutOfBoundsException
-//	NoClassDefFoundError
-//	NoSuchMethodFoundError
-//	NumberFormatException
-//	IllegalArgumentException
 }

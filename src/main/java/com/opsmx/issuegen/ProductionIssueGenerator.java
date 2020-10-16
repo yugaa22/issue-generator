@@ -1,4 +1,4 @@
-package hello;
+package com.opsmx.issuegen;
 
 import javax.servlet.http.HttpServletRequest;
 

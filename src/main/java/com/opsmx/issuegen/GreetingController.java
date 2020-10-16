@@ -1,4 +1,4 @@
-package hello;
+package com.opsmx.issuegen;
 
 
 import java.io.BufferedReader;
@@ -43,8 +43,8 @@ public class GreetingController {
             if(delay > 0) {
             	Random r = new Random();
             	delay = r.nextInt((delay - delay/2) + 1) + delay/2;
-                
-                Thread.sleep(delay);
+            	
+            	Thread.sleep(delay);
             }
             
             log.info("issuegen.agent.util.method.MPayBusiness - categoryOneServices start");
@@ -84,13 +84,13 @@ public class GreetingController {
     }
 
     private void generateIssues(String issue){
-        if("CRITICAL".equals(issue)){
+        if(IssueMessageUtils.CRITICAL.equalsIgnoreCase(issue)){
             log.error("issuegen.agent.util.method.MPayBusiness - FATAL rest call response is empty!");
-        } else if ("ERROR".equals(issue)){
+        } else if (IssueMessageUtils.ERROR.equalsIgnoreCase(issue)){
            log.error("issuegen.agent.util.method.MPayBusiness - Assert : userName is missing.");
-        } else if ("WARN".equals(issue)){
+        } else if (IssueMessageUtils.WARN.equalsIgnoreCase(issue)){
             log.warn("issuegen.agent.util.method.MPayBusiness - Response is empty string. No data returned. SessionInfoCode value might be expired.");
-        } else if ("DEBUG".equals(issue)){
+        } else if (IssueMessageUtils.DEBUG.equalsIgnoreCase(issue)){
             log.debug(IssueMessageUtils.getDebugMsg());
         }else {
             log.info(IssueMessageUtils.getInfoMsg());
