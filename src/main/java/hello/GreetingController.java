@@ -22,7 +22,7 @@ import lombok.extern.slf4j.Slf4j;
 @RestController
 public class GreetingController {
 
-    static PropertiesUtil proUtil = new PropertiesUtil();
+    static PropertiesUtil proUtil = new PropertiesUtil(); 
     static Properties properties = proUtil.getInstance();
 
     @RequestMapping("/greeting")
