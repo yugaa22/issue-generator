@@ -33,6 +33,24 @@
           request.open('GET', url, true);
           request.send();
       }
+      
+      function customLog(value) {
+    	  
+    	  var txtarea = document.getElementById("customtxt");
+    	  
+    	  if (txtarea.value.length == 0)
+          { 
+             alert("Provide custom message");  	
+             return false; 
+          }  
+    	  
+    	  msg = txtarea.value
+          var base_url = window.location.origin;
+          var request = new XMLHttpRequest();
+          var url = base_url+"/customlog?type="+value+"&msg="+escape(msg);
+          request.open('GET', url, true);
+          request.send();
+      }
     </script>
     <script>
         var app = angular.module('myApp', []);
@@ -51,6 +69,16 @@
             <input type="button" class="button warn" name="WARN" value="WARNING" onclick="mainLog('WARN')">
             <input type="button" class="button error" name="ERROR" value="ERROR" onclick="mainLog('ERROR')">
             <input type="button" class="button critic" name="CRITICAL" value="CRITICAL" onclick="mainLog('CRITICAL')">
+        </div>
+        <h2>Custom Message</h2>
+        <div>
+			  <textarea name="message" placeholder="Provide custom message" rows="4" cols="70" id="customtxt"></textarea>
+			  <br>
+			  <input type="submit" class="info" value="INFO" onclick="customLog('INFO')">
+			  <input type="submit" class="error" value="ERROR" onclick="customLog('ERROR')">
+			  <input type="submit" class="warn" value="WARN" onclick="customLog('WARN')">
+			  <input type="submit" class="debug" value="DEBUG" onclick="customLog('DEBUG')">
+			  <input type="submit" class="critic" value="CRITICAL"  onclick="customLog('CRITICAL')">
         </div>
     </div>
     <div class="row issue">
