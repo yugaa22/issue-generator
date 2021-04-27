@@ -173,7 +173,7 @@
           <boolProp name="independentListPerThread">false</boolProp>
         </com.blazemeter.jmeter.RandomCSVDataSetConfig>
         <hashTree/>
-        <UniformRandomTimer guiclass="UniformRandomTimerGui" testclass="UniformRandomTimer" testname="timer" enabled="true">
+        <UniformRandomTimer guiclass="UniformRandomTimerGui" testclass="UniformRandomTimer" testname="warning timer" enabled="true">
           <stringProp name="ConstantTimer.delay">30000</stringProp>
           <stringProp name="RandomTimer.range">30000</stringProp>
         </UniformRandomTimer>
@@ -219,7 +219,7 @@
           </HTTPSamplerProxy>
           <hashTree/>
         </hashTree>
-        <UniformRandomTimer guiclass="UniformRandomTimerGui" testclass="UniformRandomTimer" testname="error timer" enabled="true">
+        <UniformRandomTimer guiclass="UniformRandomTimerGui" testclass="UniformRandomTimer" testname="critical error timer" enabled="true">
           <stringProp name="ConstantTimer.delay">30000</stringProp>
           <stringProp name="RandomTimer.range">150000</stringProp>
         </UniformRandomTimer>
