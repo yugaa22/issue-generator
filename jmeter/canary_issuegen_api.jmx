@@ -12,6 +12,25 @@
       <stringProp name="TestPlan.user_define_classpath"></stringProp>
     </TestPlan>
     <hashTree>
+      <Arguments guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+        <collectionProp name="Arguments.arguments">
+          <elementProp name="CANARY_SERVER_IP" elementType="HTTPArgument">
+            <boolProp name="HTTPArgument.always_encode">false</boolProp>
+            <stringProp name="Argument.value">20.69.150.43</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+            <boolProp name="HTTPArgument.use_equals">true</boolProp>
+            <stringProp name="Argument.name">CANARY_SERVER_IP</stringProp>
+          </elementProp>
+          <elementProp name="CANARY_PORT" elementType="HTTPArgument">
+            <boolProp name="HTTPArgument.always_encode">false</boolProp>
+            <stringProp name="Argument.value">8595</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+            <boolProp name="HTTPArgument.use_equals">true</boolProp>
+            <stringProp name="Argument.name">CANARY_PORT</stringProp>
+          </elementProp>
+        </collectionProp>
+      </Arguments>
+      <hashTree/>
       <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Info Group" enabled="true">
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
@@ -30,8 +49,8 @@
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
             <collectionProp name="Arguments.arguments"/>
           </elementProp>
-          <stringProp name="HTTPSampler.domain">20.69.150.43</stringProp>
-          <stringProp name="HTTPSampler.port">8595</stringProp>
+          <stringProp name="HTTPSampler.domain">${CANARY_SERVER_IP}</stringProp>
+          <stringProp name="HTTPSampler.port">${CANARY_PORT}</stringProp>
           <stringProp name="HTTPSampler.protocol">http</stringProp>
           <stringProp name="HTTPSampler.contentEncoding"></stringProp>
           <stringProp name="HTTPSampler.path">logs?type=INFO</stringProp>
@@ -81,8 +100,8 @@
             <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
               <collectionProp name="Arguments.arguments"/>
             </elementProp>
-            <stringProp name="HTTPSampler.domain">20.69.150.43</stringProp>
-            <stringProp name="HTTPSampler.port">8595</stringProp>
+            <stringProp name="HTTPSampler.domain">${CANARY_SERVER_IP}</stringProp>
+            <stringProp name="HTTPSampler.port">${CANARY_PORT}</stringProp>
             <stringProp name="HTTPSampler.protocol">http</stringProp>
             <stringProp name="HTTPSampler.contentEncoding"></stringProp>
             <stringProp name="HTTPSampler.path">issue?type=${exception}</stringProp>
@@ -127,8 +146,8 @@
             <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
               <collectionProp name="Arguments.arguments"/>
             </elementProp>
-            <stringProp name="HTTPSampler.domain">20.69.150.43</stringProp>
-            <stringProp name="HTTPSampler.port">8595</stringProp>
+            <stringProp name="HTTPSampler.domain">${CANARY_SERVER_IP}</stringProp>
+            <stringProp name="HTTPSampler.port">${CANARY_PORT}</stringProp>
             <stringProp name="HTTPSampler.protocol">http</stringProp>
             <stringProp name="HTTPSampler.contentEncoding"></stringProp>
             <stringProp name="HTTPSampler.path">customlog?type=WARN&amp;msg=${__urlencode(${warning})}</stringProp>
@@ -184,8 +203,8 @@
             <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
               <collectionProp name="Arguments.arguments"/>
             </elementProp>
-            <stringProp name="HTTPSampler.domain">20.69.150.43</stringProp>
-            <stringProp name="HTTPSampler.port">8595</stringProp>
+            <stringProp name="HTTPSampler.domain">${CANARY_SERVER_IP}</stringProp>
+            <stringProp name="HTTPSampler.port">${CANARY_PORT}</stringProp>
             <stringProp name="HTTPSampler.protocol">http</stringProp>
             <stringProp name="HTTPSampler.contentEncoding"></stringProp>
             <stringProp name="HTTPSampler.path">customlog?type=CRITICAL&amp;msg=${__urlencode(${error})}</stringProp>
