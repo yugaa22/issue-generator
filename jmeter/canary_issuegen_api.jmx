@@ -80,7 +80,7 @@
       </ThreadGroup>
       <hashTree>
         <com.blazemeter.jmeter.RandomCSVDataSetConfig guiclass="com.blazemeter.jmeter.RandomCSVDataSetConfigGui" testclass="com.blazemeter.jmeter.RandomCSVDataSetConfig" testname="random exception" enabled="true">
-          <stringProp name="filename">/home/luthan/jmeter/java_execption.csv</stringProp>
+          <stringProp name="filename">./java_execption.csv</stringProp>
           <stringProp name="fileEncoding">UTF-8</stringProp>
           <stringProp name="delimiter">\4t</stringProp>
           <stringProp name="variableNames">exception</stringProp>
@@ -142,7 +142,7 @@
           <boolProp name="IfController.useExpression">true</boolProp>
         </IfController>
         <hashTree>
-          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="HTTP Request" enabled="true">
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="custom warning Request" enabled="true">
             <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
               <collectionProp name="Arguments.arguments"/>
             </elementProp>
@@ -163,7 +163,7 @@
           <hashTree/>
         </hashTree>
         <com.blazemeter.jmeter.RandomCSVDataSetConfig guiclass="com.blazemeter.jmeter.RandomCSVDataSetConfigGui" testclass="com.blazemeter.jmeter.RandomCSVDataSetConfig" testname="bzm - Random CSV Data Set Config" enabled="true">
-          <stringProp name="filename">/home/luthan/jmeter/warnings.csv</stringProp>
+          <stringProp name="filename">./warnings.csv</stringProp>
           <stringProp name="fileEncoding">UTF-8</stringProp>
           <stringProp name="delimiter">\4t</stringProp>
           <stringProp name="variableNames">warning</stringProp>
@@ -225,7 +225,7 @@
         </UniformRandomTimer>
         <hashTree/>
         <com.blazemeter.jmeter.RandomCSVDataSetConfig guiclass="com.blazemeter.jmeter.RandomCSVDataSetConfigGui" testclass="com.blazemeter.jmeter.RandomCSVDataSetConfig" testname="bzm - Random CSV Data Set Config" enabled="true">
-          <stringProp name="filename">/home/luthan/jmeter/critical.csv</stringProp>
+          <stringProp name="filename">./critical.csv</stringProp>
           <stringProp name="fileEncoding">UTF-8</stringProp>
           <stringProp name="delimiter">\4t</stringProp>
           <stringProp name="variableNames">error</stringProp>
