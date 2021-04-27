@@ -16,8 +16,9 @@
 
 8. By default jmeter script will run for 30 mins, if you wish to run it for more time search for "ThreadGroup.duration" and change "1800" to required time in seconds.
 
-9. In canary_issuegen_api.jmx we are generating warning, error and critical error in random time intervals
-   warning -->
+9. In canary_issuegen_api.jmx we are generating warning, error and critical error in random time intervals.
+  
+  warning -->
 	   *  warning message will print every 30s to 1min  
 	   *  if you wish to change repeatation of warning message, you can change "ConstantTimer.delay" and "RandomTimer.range" which are in milliseconds under --> testname="warning timer".
 	      where "ConstantTimer.delay" is minimum delay between warning message and "RandomTimer.range" is random delay range which get adds to "ConstantTimer.delay".
