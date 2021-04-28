@@ -12,7 +12,7 @@
 
 6. In baseapp.jmx we are only generating info logs.
 
-7. In canary_issuegen_api.jmx we are only generating info, warning, error and critical errors.
+7. In canary_issuegen_api.jmx we are generating info, warning, error and critical errors.
 
 8. By default jmeter script will run for 30 mins, if you wish to run it for more time search for "ThreadGroup.duration" and change "1800" to required time in seconds.
 
