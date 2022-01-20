@@ -99,4 +99,4 @@ This rest app you can use for generating log and metric data using api as well a
 will create a log of type issue 
 valid input for issue are CRITICAL,ERROR,DEBUG,WARN,INFO
 defalult log will be of type info
-#### SlackOps Testing for manual judgement new hello
+#### SlackOps Testing for manual judgement
