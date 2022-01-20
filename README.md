@@ -1,7 +1,6 @@
 # RestApp
 This rest app you can use for generating log and metric data using api as well as UI also for 
 * API List
-
   - /greeting
   - /issues
   - /dogcount
