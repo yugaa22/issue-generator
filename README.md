@@ -46,7 +46,7 @@ This rest app you can use for generating log and metric data using api as well a
 
     { "catCount": 20 }
 
-### Request
+### Request  
 
 `GET /issues/`
 
