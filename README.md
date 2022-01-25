@@ -79,7 +79,7 @@ This rest app you can use for generating log and metric data using api as well a
        - NO_CLASS_DEF_FOUND
        - NO_SUCH_METHOD_FOUND
        - NUMBER_FORMAT
-       - ILLEGAL_ARGUMENT
+       - ILLEGAL_ARGUMENT 
        - CLASS_NOT_FOUND
        
  ### Request for specific warnings
