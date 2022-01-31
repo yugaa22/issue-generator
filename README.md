@@ -9,7 +9,7 @@ This rest app you can use for generating log and metric data using api as well a
   - /logs?type=''
   - /issue?type=''
   - /warn?type=''
-   
+    
 ## Get a html page
 
 
