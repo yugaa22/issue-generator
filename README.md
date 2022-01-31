@@ -11,8 +11,7 @@ This rest app you can use for generating log and metric data using api as well a
   - /warn?type=''
     
 ## Get a html page
-     
-
+    
 ### Request  
 
 `GET /greeting/`
