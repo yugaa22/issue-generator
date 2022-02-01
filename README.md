@@ -31,7 +31,7 @@ This rest app you can use for generating log and metric data using api as well a
 
     curl -i -H 'Accept: application/json' http://localhost:8080/dogcount
 
-### Response 
+### Response  
 
     { "dogCount": 16 }
 
