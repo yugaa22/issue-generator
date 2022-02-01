@@ -62,7 +62,7 @@ This rest app you can use for generating log and metric data using api as well a
        - WARN
        - INFO
        
-### Request for specific errors
+### Request for specific errors 
     
  GET /issue?type='OUT_OF_MEMORY'
 
