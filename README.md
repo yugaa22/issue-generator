@@ -5,7 +5,7 @@ This rest app you can use for generating log and metric data using api as well a
   - /greeting  
   - /issues 
   - /dogcount
-  - /catcount
+  - /catcount 
   - /logs?type=''
   - /issue?type=''
   - /warn?type=''   
