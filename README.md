@@ -1,7 +1,7 @@
 # RestApp
 This rest app you can use for generating log and metric data using api as well as UI also for  
 * API List    
-*  
+*    
   - /greeting 
   - /issues
   - /dogcount
@@ -26,12 +26,12 @@ This rest app you can use for generating log and metric data using api as well a
     HTTP/1.1 200 OK
     HTML Page
 ## Rest APIs
-### Request
+### Request  cbcb
 `GET /dogcount`
 
     curl -i -H 'Accept: application/json' http://localhost:8080/dogcount
 
-### Response
+### Response 
 
     { "dogCount": 16 }
 
