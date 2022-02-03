@@ -24,7 +24,7 @@ public class TestLogExceptions {
 	public void test() {
 //		log.error("class not found in classpath", new ClassNotFoundException("TestingApp"));
 		
-		logger.fatal(mark, "fatal error");
+		logger.fatal(mark, "fatal error stopping");
 	}
 	
 	@Test
