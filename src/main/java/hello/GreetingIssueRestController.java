@@ -18,7 +18,7 @@ import lombok.extern.slf4j.Slf4j;
 @RestController
 public class GreetingIssueRestController {
 				
-	private static final String OPERATION_DONE_SUCCESSFULLY = "Operation done successfully";
+	private static final String OPERATION_DONE_SUCCESSFULLY = "Operation done successfully ";
 
 	@GetMapping("/logs")
 	public ResponseEntity<String> logs(HttpServletRequest httpServletRequest, @RequestParam("type") String type) {
