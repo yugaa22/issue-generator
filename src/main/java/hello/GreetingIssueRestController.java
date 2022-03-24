@@ -20,16 +20,29 @@ public class GreetingIssueRestController {
 				
 	private static final String OPERATION_DONE_SUCCESSFULLY = "Operation done successfully ";
 
+        private static Integer count = 0; 
+
 	@GetMapping("/logs")
 	public ResponseEntity<String> logs(HttpServletRequest httpServletRequest, @RequestParam("type") String type) {
-		generateLogs(type);
-		return new ResponseEntity<>(OPERATION_DONE_SUCCESSFULLY,HttpStatus.OK);
+		HttpStatus httpStatus = generateLogs(type);
+		if (count == 0) {
+			count = count + 1;
+			return new ResponseEntity<>(OPERATION_DONE_SUCCESSFULLY, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		
+		if (count == 10) {
+			count = 0;
+		} else {
+			count = count + 1;
+		}
+		
+		return new ResponseEntity<>(OPERATION_DONE_SUCCESSFULLY, httpStatus);
 	}
 
 	@GetMapping("/issue")
 	public ResponseEntity<String> issueLogs(HttpServletRequest httpServletRequest, @RequestParam("type") String type){		
-		generateIssues(type);
-		return new ResponseEntity<>(OPERATION_DONE_SUCCESSFULLY,HttpStatus.OK);
+		HttpStatus httpStatus =  generateIssues(type);
+		return new ResponseEntity<>(OPERATION_DONE_SUCCESSFULLY, httpStatus);
 	}
 	
 	@GetMapping("/customlog")
@@ -45,107 +58,111 @@ public class GreetingIssueRestController {
         }
         
         if (IssueMessageUtils.DEBUG.equalsIgnoreCase(type)){
-            log.debug("issuegen.bus.managed.beans.LogUtils - {}", msg);
+        	log.debug("issuegen.bus.managed.beans.LogUtils - {}", msg);
             return;
         }
         
         if (IssueMessageUtils.ERROR.equalsIgnoreCase(type)){
-           log.error("issuegen.bus.managed.beans.LogUtils - {}", msg);
+        	log.error("issuegen.bus.managed.beans.LogUtils - {}", msg);
            return;
         }
         
         if (IssueMessageUtils.WARN.equalsIgnoreCase(type)){
-            log.warn("issuegen.bus.managed.beans.LogUtils - {}", msg);
+        	log.warn("issuegen.bus.managed.beans.LogUtils - {}", msg);
             return;
         }  
           
         log.info("issuegen.bus.managed.beans.LogUtils - {}", msg);
     }
 	
-	private void generateLogs(String type) {
+	private HttpStatus generateLogs(String type) {
         if(IssueMessageUtils.CRITICAL.equalsIgnoreCase(type)){
         	log.error("issuegen.bus.managed.beans.MPayBusiness - FATAL rest call response is empty!");
-            return;
+            return HttpStatus.SERVICE_UNAVAILABLE;
         }
         
         if (IssueMessageUtils.DEBUG.equalsIgnoreCase(type)){
-            log.debug(IssueMessageUtils.getDebugMsg());
-            return;
+        	log.debug(IssueMessageUtils.getDebugMsg());
+            return HttpStatus.OK;
         }
         
         if (IssueMessageUtils.ERROR.equalsIgnoreCase(type)){
-           log.error("issuegen.agent.util.method.MPayBusiness - Assert : userName is missing.");
-           return;
+        	log.error("issuegen.agent.util.method.MPayBusiness - Assert : userName is missing.");
+           return HttpStatus.INSUFFICIENT_STORAGE;
         }
         
         if (IssueMessageUtils.WARN.equalsIgnoreCase(type)){
-            log.warn("issuegen.bus.managed.beans.MPayBusiness - Response is empty string. No data returned. SessionInfoCode value might be expired.");
-            return;
+        	log.warn("issuegen.bus.managed.beans.MPayBusiness - Response is empty string. No data returned. SessionInfoCode value might be expired.");
+            return HttpStatus.NO_CONTENT;
         }  
           
         log.info(IssueMessageUtils.getInfoMsg());
+        return HttpStatus.OK;
     }
 	
-	private void generateIssues(String type){
+	private HttpStatus generateIssues(String type){
 		
 		if("DB_ERROR".equalsIgnoreCase(type)) {
 			log.error(IssueMessageUtils.getDbError());
-			return;
+			return HttpStatus.INTERNAL_SERVER_ERROR;
 		}
         
         if("OUT_OF_MEMORY".equalsIgnoreCase(type)) {
         	log.error("issuegen.bus.managed.beans.MPayBusiness - memory execeded", new OutOfMemoryError("GC overhead limit exceeded"));
-        	return;
+        	return HttpStatus.INSUFFICIENT_STORAGE;
         }
         
         if("STACK_OVERFLOW_ERROR".equalsIgnoreCase(type)) {
         	log.error("issuegen.bus.managed.beans.MPayBusiness - stack overflow error occured", new StackOverflowError("Stack overflow occured"));
-        	return;
+        	return HttpStatus.INTERNAL_SERVER_ERROR;
         }
         
         if("FILE_NOT_FOUND".equalsIgnoreCase(type)) {
         	log.error("issuegen.bus.managed.beans.MPayBusiness - File not found", new FileNotFoundException("File not found"));
-        	return;
+        	return HttpStatus.INTERNAL_SERVER_ERROR;
         }
         
         if("ARRAY_INDEX_OUT_OF_BOUND".equalsIgnoreCase(type)) {
         	log.error("issuegen.bus.managed.beans.MPayBusiness - Array index out of range", new ArrayIndexOutOfBoundsException(6));
-        	return;
+        	return HttpStatus.INTERNAL_SERVER_ERROR;
         }
         
         if("NULL_POINTER".equalsIgnoreCase(type)) {
         	log.error("issuegen.bus.managed.beans.MPayBusiness - Null pointer exception occured", new NullPointerException());
-        	return;
+        	return HttpStatus.INTERNAL_SERVER_ERROR;
         }
         
         if("STRING_INDEX_OUT_OF_BOUND".equalsIgnoreCase(type)) {
         	log.error("issuegen.bus.managed.beans.MPayBusiness - String index out of range", new StringIndexOutOfBoundsException("String index out of range"));
-        	return;
+        	return HttpStatus.INTERNAL_SERVER_ERROR;
         }
         
         if("NO_CLASS_DEF_FOUND".equalsIgnoreCase(type)) {
         	log.error("issuegen.bus.managed.beans.SSOAgentFilter - No class def found", new NoClassDefFoundError("No class def found A"));
-        	return;
+        	return HttpStatus.INTERNAL_SERVER_ERROR;
         }
         
         if("NO_SUCH_METHOD_FOUND".equalsIgnoreCase(type)) {
         	log.error("issuegen.bus.managed.beans.MPayBusiness - No such method found", new NoSuchMethodError("Method not found"));
-        	return;
+        	return HttpStatus.INTERNAL_SERVER_ERROR;
         }
         
         if("NUMBER_FORMAT".equalsIgnoreCase(type)) {
         	log.error("issuegen.bus.managed.beans.JourneyPlannerMB - Number format exception occured", new NumberFormatException("Number format exception"));
-        	return;
+        	return HttpStatus.INTERNAL_SERVER_ERROR;
         }
         
         if("ILLEGAL_ARGUMENT".equalsIgnoreCase(type)) {
         	log.error("issuegen.bus.managed.beans.MPayBusiness - Illegal argument exception occured", new IllegalArgumentException("Illegal argument exception"));
-        	return;
+        	return HttpStatus.INTERNAL_SERVER_ERROR;
         }
         
         if("CLASS_NOT_FOUND".equalsIgnoreCase(type)){
         	log.error("issuegen.bus.managed.beans.MPayBusiness - class not found in classpath", new ClassNotFoundException("class not found in classpath"));
+        	return HttpStatus.INTERNAL_SERVER_ERROR;
         } 
+        
+        return HttpStatus.OK;
     }
 	
 	@GetMapping("/warn")
