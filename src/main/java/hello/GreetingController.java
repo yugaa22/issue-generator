@@ -2,18 +2,12 @@ package hello;
 
 
 import java.io.BufferedReader;
-import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.io.InputStreamReader;
 import java.util.Properties;
 import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -28,9 +22,6 @@ import lombok.extern.slf4j.Slf4j;
 @RestController
 public class GreetingController {
 
-	private static final Logger logger = LoggerFactory.getLogger(GreetingController.class);
-
-	
     static PropertiesUtil proUtil = new PropertiesUtil(); 
     static Properties properties = proUtil.getInstance();
 
@@ -38,43 +29,37 @@ public class GreetingController {
     public String greeting(@RequestParam(value = "delay", defaultValue = "0") Integer delay) {
 
         String query;
-        StringBuilder sb = new StringBuilder();
+        StringBuffer sb = new StringBuffer();
         String query2;
-        StringBuilder sb2 = new StringBuilder();
+        StringBuffer sb2 = new StringBuffer();
 
         ClassLoader cl = GreetingController.class.getClassLoader();
-        Path path = Paths.get(cl.getResource("testpage.html").getFile());
-        if(delay > 0) {
-        	Random r = new Random();
-        	delay = r.nextInt((delay - delay/2) + 1) + delay/2;
-            
-            try {
-				Thread.sleep(delay);
-			} catch (InterruptedException e) {
-				logger.error("issuegen.agent.util.method.MPayBusiness - Sleep failed", e);
-			}
-        }
-        
-        try (BufferedReader br = Files.newBufferedReader(path, StandardCharsets.UTF_8)){
-        	while ((query = br.readLine()) != null)
+        try {
+            BufferedReader br = new BufferedReader(new InputStreamReader(cl.getResource("testpage.html").openStream()));
+            while ((query = br.readLine()) != null)
                 sb.append(query);
             br.close();
-            
-        } catch (IOException e) {
-        	logger.error("issuegen.agent.util.method.MPayBusiness - error found", e);
-		}
-        
-        String watchdog = properties.getProperty("app.dog.image");
-        Path path2 = Paths.get(cl.getResource(watchdog).getFile());
-        try (BufferedReader br = Files.newBufferedReader(path2, StandardCharsets.UTF_8)){
-        	while ((query2 = br.readLine()) != null)
-                sb2.append(query2);
-            br.close();
-            
-        } catch (IOException e) {
-        	logger.error("issuegen.agent.util.method.MPayBusiness - error found", e);
-		}
 
+            if(delay > 0) {
+            	Random r = new Random();
+            	delay = r.nextInt((delay - delay/2) + 1) + delay/2;
+                
+                Thread.sleep(delay);
+            }
+            
+            log.info("issuegen.agent.util.method.MPayBusiness - categoryOneServices start");
+            String watchdog = properties.getProperty("app.dog.image");
+            
+
+            BufferedReader br2 = new BufferedReader(new InputStreamReader(cl.getResource(watchdog).openStream()));
+            while ((query2 = br2.readLine()) != null)
+                sb2.append(query2);
+            br2.close();
+            log.info("issuegen.agent.util.method.MPayBusiness - categoryOneServices end");
+
+        } catch (Exception e) {
+            log.error("issuegen.agent.util.method.MPayBusiness - error found", e);
+        }
         return sb.length() > 0 ? sb.toString().replace("##dogimage##", sb2.toString()) : " No page found";
     }
 
@@ -83,7 +68,7 @@ public class GreetingController {
         try {
             calculateBarkingCats();
         } catch (Exception ex){
-            logger.error("issuegen.agent.util.method.MPayBusiness - error found while counting barking cats {}",ex.getMessage(),ex);
+            log.error("issuegen.agent.util.method.MPayBusiness - error found while counting barking cats {}",ex.getMessage(),ex);
         }
         return new ResponseEntity("No Barking cats!", HttpStatus.BAD_REQUEST);
     }
@@ -94,41 +79,36 @@ public class GreetingController {
 
     @RequestMapping("/issues")
     public ResponseEntity generateIssues(HttpServletRequest httpServletRequest, @RequestParam("issue") String issue){
-    	HttpStatus httpStatus = generateIssues(issue);
-        return new ResponseEntity("Operation done successfully", httpStatus);
+            generateIssues(issue);
+            return new ResponseEntity("Operation done successfully",HttpStatus.OK);
     }
 
-    private HttpStatus generateIssues(String issue){
+    private void generateIssues(String issue){
         if("CRITICAL".equals(issue)){
-            logger.error("issuegen.agent.util.method.MPayBusiness - FATAL rest call response is empty!");
-            return HttpStatus.INTERNAL_SERVER_ERROR;
+            log.error("issuegen.agent.util.method.MPayBusiness - FATAL rest call response is empty!");
         } else if ("ERROR".equals(issue)){
-           logger.error("issuegen.agent.util.method.MPayBusiness - Assert : userName is missing.");
-           return HttpStatus.INTERNAL_SERVER_ERROR;
+           log.error("issuegen.agent.util.method.MPayBusiness - Assert : userName is missing.");
         } else if ("WARN".equals(issue)){
-            logger.warn("issuegen.agent.util.method.MPayBusiness - Response is empty string. No data returned. SessionInfoCode value might be expired.");
-            return HttpStatus.OK;
+            log.warn("issuegen.agent.util.method.MPayBusiness - Response is empty string. No data returned. SessionInfoCode value might be expired.");
         } else if ("DEBUG".equals(issue)){
-            logger.debug(IssueMessageUtils.getDebugMsg());
-            return HttpStatus.OK;
+            log.debug(IssueMessageUtils.getDebugMsg());
         }else {
-            logger.info(IssueMessageUtils.getInfoMsg());
-            return HttpStatus.OK;
+            log.info(IssueMessageUtils.getInfoMsg());
         }
     }
 
 
     @RequestMapping("/dogcount")
     public String dogCount() {
-        logger.info("issuegen.agent.util.method.MPayBusiness - pagerServices start");
-        logger.info("issuegen.agent.util.method.MPayBusiness - pagerServices end");
+        log.info("issuegen.agent.util.method.MPayBusiness - pagerServices start");
+        log.info("issuegen.agent.util.method.MPayBusiness - pagerServices end");
         return "{ \"dogCount\": 20 }";
     }
 
     @RequestMapping("/catcount")
     public String catCount() {
-    	logger.info("issuegen.agent.util.method.MPayBusiness - analyticServices start");
-        logger.info("issuegen.agent.util.method.MPayBusiness - analyticServices end");
+    	log.info("issuegen.agent.util.method.MPayBusiness - analyticServices start");
+        log.info("issuegen.agent.util.method.MPayBusiness - analyticServices end");
         return "{ \"catCount\": 16 }";
     }
 }
