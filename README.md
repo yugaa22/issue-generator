@@ -14,7 +14,7 @@ This rest app you can use for generating log and metric data using api as well a
     
 ### Request  
   
-`GET /greeting/`
+`GET /greeting/` 
 
     curl -i -H 'Accept: application/json' http://localhost:8080/greeting/
     
