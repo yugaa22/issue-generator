@@ -20,7 +20,7 @@ This rest app you can use for generating log and metric data using api as well a
     
  GET /`
 
-    curl -i -H 'Accept: application/json' http://localhost:8080
+    curl -i -H 'Accept: application/json' http://localhost:8080 
     
 ### Response
     HTTP/1.1 200 OK
