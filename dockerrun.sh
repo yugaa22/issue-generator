@@ -11,7 +11,7 @@ fi
 DATADOG_AGENT=""
 DATADOG_PROPERTIES=""
 if [ ! -z "$DD_AGENT_HOST" ]; then
-   DATADOG_AGENT="-javaagent:/opt/dd-java-agent.jar"
+   DATADOG_AGENT="-javaagent:/opt/datadog/dd-java-agent.jar"
    DATADOG_PROPERTIES="-Ddd.agent.host=${DD_AGENT_HOST} -Ddd.service.name=${SERVICE_NAME} -Ddd.agent.port=8126"
 fi
 
