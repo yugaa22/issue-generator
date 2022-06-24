@@ -104,7 +104,6 @@ defalult log will be of type info
 update
 ##demo webhook trigger
 
-###trigger issuegen
 
 ## trigger issuegen - 24 jun 2022
 
