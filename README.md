@@ -114,3 +114,4 @@ update
 ## trigger issuegen - 24 jun 2022
 
 issuegen-pipeline
+pipeline
