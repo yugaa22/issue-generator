@@ -17,9 +17,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout OpsMx Igor repo
-      uses: actions/checkout@master
+      uses: actions/checkout@v3
       with:
-        name: opsmx/igor
+        repository: opsmx/igor
         ref: refs/heads/release-1.28.x
     - uses: actions/setup-java@v3
       with:
