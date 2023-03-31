@@ -8,8 +8,6 @@ env:
   GRADLE_OPTS: -Dorg.gradle.daemon=false -Xmx2g -Xms2g
   CONTAINER_REGISTRY: quay.io/opsmxpublic
 
-
-
 jobs:
   gradle-igor:
     runs-on: ubuntu-latest
@@ -42,46 +40,7 @@ jobs:
           echo ::set-output name=VERSION::v1 
     - name: Build
       run: |
-           ./gradlew build --stacktrace ${{ steps.build_variables.outputs.REPO }}-web:installDist
+           ./gradlew build --stacktrace ${{ steps.build_variables.outputs.REPO }}-web:installDist --dry-run
             ls -ltra docker/ubi8
-            docker build -f docker/ubi8/Dockerfile-fips -t  "${{ env.CONTAINER_REGISTRY }}/${{ steps.build_variables.outputs.REPO }}:${{ steps.build_variables.outputs.VERSION }}" .
+            #docker build -f docker/ubi8/Dockerfile-fips -t  "${{ env.CONTAINER_REGISTRY }}/${{ steps.build_variables.outputs.REPO }}:${{ steps.build_variables.outputs.VERSION }}" .
             
-  
-
-
-  gradle-rosco:
-    runs-on: ubuntu-latest
-    steps:
-    - name: Checkout OpsMx Rosco repo
-      uses: actions/checkout@v3
-      with:
-        repository: opsmx/rosco
-        ref: refs/heads/v1.8.5-1.28.4
-    - uses: actions/setup-java@v3
-      with:
-        distribution: zulu
-        java-version: 11
-    - run: echo "💡 The OpsMx/igor repository has been cloned to the runner."
-    - run: echo "🖥️ The workflow is now ready to test your code on the runner."
-    - run: echo "🍏 This job's status is ${{ job.status }}."
-    - name: List files in the repository and the branch 
-      run: |
-          #ls ${{ github.workspace }} 
-          
-          echo "Repo is======:" ${{ github.repository }}
-          echo " "
-          ls -ltra docker/ubi8
-          echo "Rosco Git Branch"
-          git branch 
-    - name: Prepare build variables
-      id: build_variables
-      run: |
-          echo ::set-output name=REPO::rosco
-          echo ::set-output name=VERSION::v1 
-    - name: Build
-      run: |
-           ./gradlew build --stacktrace ${{ steps.build_variables.outputs.REPO }}-web:installDist
-            ls -ltra docker/ubi8
-            docker build -f docker/ubi8/Dockerfile-fips -t  "${{ env.CONTAINER_REGISTRY }}/${{ steps.build_variables.outputs.REPO }}:${{ steps.build_variables.outputs.VERSION }}" .
-            
-  
