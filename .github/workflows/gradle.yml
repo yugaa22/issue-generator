@@ -30,7 +30,7 @@ jobs:
       run: |
           #ls ${{ github.workspace }} 
           
-          echo "Repo is======: github.repository
+          echo "Repo is======:" github.repository
           echo "Dockerfile"
           ls -ltra docker/ubi8
           echo "Igor Git Branch"
@@ -71,7 +71,7 @@ jobs:
       run: |
           #ls ${{ github.workspace }} 
           
-          echo "Repo is======: github.repository
+          echo "Repo is======:" github.repository
           echo "Dockerfile"
           ls -ltra docker/ubi8
           echo "Igor Git Branch"
