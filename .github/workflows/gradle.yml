@@ -45,7 +45,7 @@ jobs:
     - uses: gradle/gradle-build-action@v2
       with:
         gradle-version: release-candidate
-    - run: ./gradlew build --dry-run
+    - run: ./gradlew build #--dry-run
     - name: List files in the repository and the branch 
       run: |
           ls ${{ github.workspace }} 
