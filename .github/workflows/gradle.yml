@@ -41,17 +41,11 @@ jobs:
       id: build_variables
       run: |
           echo ::set-output name=REPO::igor
-          echo ::set-output name=VERSION::v1
-    - uses: gradle/gradle-build-action@v2
-      with:
-        gradle-version: release-candidate
-    - run: ./gradlew build #--dry-run
-    - name: List files in the repository and the branch 
+          echo ::set-output name=VERSION::v1 
+    - name: Build
+      env:
+          ORG_GRADLE_PROJECT_version: ${{ steps.build_variables.outputs.VERSION }}
       run: |
-          ls ${{ github.workspace }} 
-          echo "Dockerfile"
-          ls -ltra docker/ubi8
-          echo "Igor Git Branch"
-          git branch 
-          
-          docker build -f docker/ubi8/Dockerfile-fips -t quay.io/opsmxpublic/igor:testv1 .
+           ./gradlew build --stacktrace ${{ steps.build_variables.outputs.REPO }}-web:installDist
+            ls -ltra docker/ubi8
+            docker build -f docker/ubi8/Dockerfile-fips -t quay.io/opsmxpublic/igor:testv1 .
