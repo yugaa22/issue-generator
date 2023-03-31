@@ -45,15 +45,13 @@ jobs:
     - uses: gradle/gradle-build-action@v2
       with:
         gradle-version: release-candidate
-    - run: ./gradlew build --dry-run 
-    
-    - name: Build and publish ubuntu container image
-      uses: docker/build-push-action@v2
-      with:
-       repository: opsmx/igor
-       ref: refs/heads/v4.7.3-1.28.4
-       context: .
-       file: Dockerfile-fips
-       push: true
-       tags: |
-            "${{ env.CONTAINER_REGISTRY }}/${{ steps.build_variables.outputs.REPO }}:${{ steps.build_variables.outputs.VERSION }}"
+    - run: ./gradlew build --dry-run
+    - name: List files in the repository and the branch 
+      run: |
+          ls ${{ github.workspace }} 
+          echo "Dockerfile"
+          ls -ltra docker/ubi8
+          echo "Igor Git Branch"
+          git branch 
+          
+          docker build -f docker/ubi8/Dockerfile-fips -t quay.io/opsmxpublic/igor:testv1 .
