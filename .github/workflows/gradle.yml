@@ -12,7 +12,7 @@ on:
     branches: [ "master" ]
   
 jobs:
-  gradle-rc:
+  gradle-igor:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout OpsMx Igor repo
@@ -24,24 +24,16 @@ jobs:
       with:
         distribution: temurin
         java-version: 11
-    - uses: gradle/gradle-build-action@v2
-      with:
-        gradle-version: release-candidate
-    - run: ./gradlew build #--dry-run just test build configuration
-
-
-  gradle-rosco:
-    runs-on: ubuntu-latest
-    steps:
-    - name: Checkout OpsMx Rosco repo
-      uses: actions/checkout@v3
-      with:
-        repository: opsmx/rosco
-        ref: refs/heads/release-1.28.x
-    - uses: actions/setup-java@v3
-      with:
-        distribution: temurin
-        java-version: 11
+    - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
+    - run: echo "🖥️ The workflow is now ready to test your code on the runner."
+    - name: List files in the repository
+      run: |
+          ls ${{ github.workspace }}
+    - run: echo "🍏 This job's status is ${{ job.status }}."
+    - name: List files in the repository and the branch 
+      run: |
+          ls ${{ github.workspace }} 
+          git branch
     - uses: gradle/gradle-build-action@v2
       with:
         gradle-version: release-candidate
