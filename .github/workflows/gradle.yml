@@ -50,8 +50,8 @@ jobs:
     - name: Build and publish ubuntu container image
       uses: docker/build-push-action@v2
       with:
-       #repository: opsmx/igor
-       #ref: refs/heads/v4.7.3-1.28.4
+       repository: opsmx/igor
+       ref: refs/heads/v4.7.3-1.28.4
        context: .
        file: Dockerfile-fips
        push: true
