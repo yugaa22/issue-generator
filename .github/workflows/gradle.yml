@@ -19,14 +19,5 @@ jobs:
     - name: Checkout OpsMX repo
       uses: actions/checkout@master
       with:
-        name: opsmx/igor
+        repository: opsmx/igor
         ref: refs/heads/release-1.28.x
-   
-    - uses: actions/setup-java@v3
-      with:
-        distribution: temurin
-        java-version: 11
-    - uses: gradle/gradle-build-action@v2
-      with:
-        gradle-version: release-candidate
-    - run: gradle build --dry-run # just test build configuration
