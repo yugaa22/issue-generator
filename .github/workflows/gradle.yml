@@ -26,8 +26,11 @@ jobs:
     - run: echo "🍏 This job's status is ${{ job.status }}."
     - name: List files in the repository and the branch 
       run: |
-          #ls ${{ github.workspace }} 
-          
+      
+         echo "Workspace ===" ${{ github.workspace }} 
+      
+            ls ${{ github.workspace }} 
+               
           echo "Repo is======:" ${{ github.repository }}
           echo " "
           ls -ltra docker/ubi8
