@@ -3,7 +3,7 @@ name: "Create Code Reivew PR1"
 on:
   push:
     branches:
-      - '*'
+      - '*abvv'
 env:
   GRADLE_OPTS: -Dorg.gradle.daemon=false -Xmx6g -Xms6g
   CONTAINER_REGISTRY: quay.io/opsmxpublic
