@@ -1,4 +1,4 @@
-name: "Create Code Reivew PR"
+name: "Create Code Reivew PR1"
 
 on:
   push:
