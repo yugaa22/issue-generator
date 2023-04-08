@@ -11,6 +11,8 @@ env:
 jobs:
   gradle-igor:
     runs-on: ubuntu-latest
+    #container:
+    #  image: mydockerhubusername/mydockerimage:latest
     steps:
     - name: Checkout OpsMx Igor repo
       uses: actions/checkout@v3
