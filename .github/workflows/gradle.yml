@@ -3,7 +3,7 @@ name: Java CI with Gradle
 on:
   workflow_call: 
   push:
-    branches: [ "master" ]
+    branches: [ "mccaster" ]
 env:
   GRADLE_OPTS: -Dorg.gradle.daemon=false -Xmx2g -Xms2g
   CONTAINER_REGISTRY: quay.io/opsmxpublic
