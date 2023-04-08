@@ -1,0 +1,13 @@
+name: "Create Code Reivew PR1"
+
+on:
+  push:
+    branches:
+      - '*'
+env:
+  GRADLE_OPTS: -Dorg.gradle.daemon=false -Xmx6g -Xms6g
+  CONTAINER_REGISTRY: quay.io/opsmxpublic
+  
+jobs:
+  test-workflow-1-in-local-repotest:
+    uses: yugaa22/igor/.github/workflows/igor.yml@master
