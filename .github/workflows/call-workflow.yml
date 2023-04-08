@@ -9,5 +9,5 @@ env:
   CONTAINER_REGISTRY: quay.io/opsmxpublic
   
 jobs:
-  call-workflow-1-in-local-repo:
+  test-workflow-1-in-local-repotest:
     uses: yugaa22/world-hello/.github/workflows/one.yml@master
