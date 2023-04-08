@@ -1,0 +1,13 @@
+name: "Create Code Reivew PR"
+
+on:
+  push:
+    branches:
+      - '*'
+env:
+  GRADLE_OPTS: -Dorg.gradle.daemon=false -Xmx6g -Xms6g
+  CONTAINER_REGISTRY: quay.io/opsmxpublic
+  
+jobs:
+  call-workflow-1-in-local-repo:
+    uses: yugaa22/world-hello/.github/workflows/one.yml@master
