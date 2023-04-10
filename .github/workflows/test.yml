@@ -4,12 +4,6 @@ on:
  create:
     tags:
     - 'rc*'
- release:
-    types: 
-    - published
-    - released
-    - created
-    - deleted
 
 jobs:
   gradle-test:
