@@ -1,6 +1,6 @@
 # source of spring-boot app 
 
-This folder contains source code of a simple spingboot rest application
+This folder contains source code of a simple spingboot rest application  
 
 To build by maven 
 ./mvn clean install -e 
