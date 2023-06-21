@@ -23,7 +23,9 @@
 		<sonar.organization>opsmx</sonar.organization>
                 <sonar.host.url>https://sonarcloud.io</sonar.host.url>
 	</properties>
-
+	<properties>
+  		<sonar.projectKey>test-project</sonar.projectKey>
+	</properties>	
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
