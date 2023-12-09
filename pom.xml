@@ -76,10 +76,13 @@
                <resource>
                    <directory>src/main/resources</directory>
                    <includes>
-                       <include>static/images/**</include>
+		       <!-- include>application.properties</include>
+		       <include>static/images/**</include -->
+		       <include>**/**</include>
                    </includes>
+	           <filtering>false</filtering>
                </resource>
-           </resources>		
+	</resources>		
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
