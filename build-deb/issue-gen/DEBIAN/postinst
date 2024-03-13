@@ -1,9 +1,4 @@
 #!/bin/bash
 #Post-install script
+. /opt/apps/issue-gen/postinst.sh
 
-#/opt/apps/issue-gen/issuegen-start.sh
-
-sleep 30s
-echo "Starting application ..."
-cd /opt/apps/issue-gen
-nohup java -jar issuegen-0.1.jar </dev/null >nohup.out 2>nohup.err &
