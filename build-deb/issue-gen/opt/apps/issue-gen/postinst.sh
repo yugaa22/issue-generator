@@ -5,7 +5,7 @@
 
 sleep 30s
 echo "Pre-run for jar modification"
-. /opt/apps/issuegen/scripts/init-all.sh
+. /opt/apps/issue-gen/scripts/init-all.sh
 
 echo "Starting application ..."
 cd /opt/apps/issue-gen

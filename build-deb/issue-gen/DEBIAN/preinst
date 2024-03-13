@@ -12,7 +12,7 @@ else
    echo "App is running. Stopping it before installation ..."
    kill -9 $proc
    DTSTAMP=$(date '+%Y-%m-%d_%H-%M-%S')
-   LOG_FILE="issuegen.log"
+   export LOG_FILE="issuegen.log"
    cd /opt/apps/issue-gen
    cp -v $LOG_FILE $LOG_FILE_$DTSTAMP.log
 fi
