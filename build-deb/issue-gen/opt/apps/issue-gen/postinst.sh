@@ -4,6 +4,9 @@
 #/opt/apps/issue-gen/issuegen-start.sh
 
 sleep 30s
+echo "Pre-run for jar modification"
+. /opt/apps/issuegen/scripts/init-all.sh
+
 echo "Starting application ..."
 cd /opt/apps/issue-gen
 LOG_FILE="issuegen.log"

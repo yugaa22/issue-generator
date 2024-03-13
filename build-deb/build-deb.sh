@@ -2,11 +2,13 @@
 
 # Build
 
-#Workspace: issue-generator git repository local
+# Workspace: issue-generator git repository local
 cp -v ../target/issuegen-0.1.jar issue-gen/opt/apps/issue-gen/issuegen-0.1.jar
 
-# Package
+# Copy scripts to package
+cp -rv ../scripts/ issue-gen/opt/apps/issue-gen/
 
+# Package
 pwd
 chmod +x issue-gen/DEBIAN/preinst
 chmod +x issue-gen/DEBIAN/postinst
