@@ -7,14 +7,15 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.Marker;
 import org.apache.logging.log4j.MarkerManager.Log4jMarker;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 //import lombok.extern.slf4j.Slf4j;
 
 //@Slf4j
-@RunWith(SpringJUnit4ClassRunner.class)
+@ExtendWith({SpringExtension.class, MockitoExtension.class})
 public class TestLogExceptions {
 
     Logger logger = LogManager.getLogger();
