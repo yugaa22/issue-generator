@@ -1,10 +1,3 @@
-    
-   test auto trigger
-   checking master commits details..this is for demo. 4/11/22 -ravig
-   testing
-   
-   checking master commits details..this is for demo.
-   this is for demo
 # Issuegen 
 This rest app you can use for generating log and metric data using api as well as UI also for    
 * API List   
