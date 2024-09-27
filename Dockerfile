@@ -17,7 +17,7 @@ ENV SERVER_PORT=8088
 ENV PAGE_COLOR=green
 ENV IMG_VER=v1
 
-WORKDIR ./
+#WORKDIR ./
 
 # Default shell for the RUN instruction is ["/bin/sh", "-c"], switch to bash
 SHELL ["/bin/bash", "-c"] 
