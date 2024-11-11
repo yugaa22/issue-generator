@@ -1,138 +1,112 @@
+# Issuegen 
+This rest app you can use for generating log and metric data using api as well as UI also for    
+* API List   
+*               
+  - /greeting   
+  - /issues  
+  - /dogcount
+  - /catcount 
+  - /logs?type=''
+  - /issue?type=''
+  - /warn?type=''      
+     
+## Get a html page
+    
+### Request  
+  
+`GET /greeting/` 
 
+    curl -i -H 'Accept: application/json' http://localhost:8080/greeting/
+    
+ GET /`
 
-![Sample image of  nodes with data](./nodes.png)
+    curl -i -H 'Accept: application/json' http://localhost:8080 
+    
+### Response
+    HTTP/1.1 200 OK
+    HTML Page 
+## Rest APIs
+### Request  cbcb
+`GET /dogcount`
 
-# Docker Swarm Visualizer
-*** note ***
-_This only works with Docker Swarm Mode in Docker Engine 1.12.0 and later. It does not work with the separate Docker Swarm project_
-> Also this is a sample app meant for learning Docker. Running this app in production is insecure and should be avoided. If you want to run it in production you must take all security precautions, and in particular [Protect the Docker daemon socket](https://docs.docker.com/engine/security/https/) with SSL.
+    curl -i -H 'Accept: application/json' http://localhost:8080/dogcount
 
-This project was originally created by [Francisco Miranda](https://github.com/maroshii) for the 2015 DockerCon EU keynote. It was adapted to be used for the 2016 DockerCon US keynote showcasing [Docker swarm mode](https://docs.docker.com/engine/swarm/). Since then the community has generously contributed many updates. Thanks to all the contributors, and a special thanks to [@DovAmir](https://github.com/DovAmir) and [@alexellis](https://github.com/alexellis) for their big contributions.
+### Response  
 
-Demo container that displays Docker services running on a Docker Swarm in a diagram.
+    { "dogCount": 16 }
 
-This works only with [Docker swarm mode](https://docs.docker.com/engine/swarm/) which was introduced in Docker 1.12. These instructions presume you are running on the master node and you already have a Swarm running.
+### Request
 
-Each node in the swarm will show all tasks running on it. When a service goes down it'll be removed. When a node goes down it won't, instead the circle at the top will turn red to indicate it went down. Tasks will be removed.
-Occasionally the Remote API will return incomplete data, for instance the node can be missing a name. The next time info for that node is pulled, the name will update.
+`GET /catcount`
 
-To run:
+    curl -i -H 'Accept: application/json' http://localhost:8080/catcount
 
-```
-$ docker run -it -d -p 8080:8080 -v /var/run/docker.sock:/var/run/docker.sock dockersamples/visualizer
-```
+### Response
 
-If port 8080 is already in use on your host, you can specify e.g. `-p [YOURPORT]:8080` instead. Example:
+    { "catCount": 20 }
 
-```
-$ docker run -it -d -p 5000:8080 -v /var/run/docker.sock:/var/run/docker.sock dockersamples/visualizer
-```
+### Request  
 
-To run with a different context root (useful when running behind an external load balancer):
+`GET /issues/`
 
-```bash
-$ docker run -it -d -e CTX_ROOT=/visualizer -v /var/run/docker.sock:/var/run/docker.sock dockersamples/visualizer
-```
+    curl -i -H 'Accept: application/json' http://localhost:8080/issues?issue='INFO'
+    
+ GET /logs?type='INFO'
 
-To run in a docker swarm:
+    curl -i -H 'Accept: application/json' http://localhost:8080/logs?type='INFO'
+    
+    list of request param values 
+       - CRITICAL
+       - DEBUG
+       - ERROR
+       - WARN
+       - INFO
+       
+### Request for specific errors 
+    
+ GET /issue?type='OUT_OF_MEMORY'
 
-```
-$ docker service create \
-  --name=viz \
-  --publish=8080:8080/tcp \
-  --constraint=node.role==manager \
-  --mount=type=bind,src=/var/run/docker.sock,dst=/var/run/docker.sock \
-  dockersamples/visualizer
-```
+    curl -i -H 'Accept: application/json' http://localhost:8080/issue?type='OUT_OF_MEMORY'
+    
+    list of request param values 
+       - OUT_OF_MEMORY
+       - STACK_OVERFLOW_ERROR
+       - FILE_NOT_FOUND
+       - ARRAY_INDEX_OUT_OF_BOUND
+       - NULL_POINTER
+       - STRING_INDEX_OUT_OF_BOUND
+       - NO_CLASS_DEF_FOUND
+       - NO_SUCH_METHOD_FOUND
+       - NUMBER_FORMAT
+       - ILLEGAL_ARGUMENT 
+       - CLASS_NOT_FOUND
+       
+ ### Request for specific warnings
+    
+ GET /warn?type='GARBAGE_COLLECTION'
 
-## Supported architectures
+    curl -i -H 'Accept: application/json' http://localhost:8080/warn?type='GARBAGE_COLLECTION'
+    
+    list of request param values 
+       - GARBAGE_COLLECTION
+       - DEPRECATED_API
+       - VERSION
+   #demo    
+       
+#dmo webhook
+#### description
+will create a log of type issue 
+valid input for issue are CRITICAL,ERROR,DEBUG,WARN,INFO
+defalult log will be of type info
 
-The main `dockersamples/visualizer` image supports **linux/amd64**.
+#### slack demo for test...
 
-**For armhf**, there is a pre-built image available. See [Running on ARM](#running-on-arm).
+update
+##demo webhook trigger
 
-**For Windows**, there is a separate `Dockerfile.windows` and image. See [Running on Windows](#running-on-windows).
+## trigger issuegen - 24 jun 2022
 
-**Missing your architecture?** See [Building a custom image](#building-a-custom-image).
+issuegen-pipeline
+pipeline
 
-## Running on ARM
-
-[@alexellisuk](https://twitter.com/alexellisuk) has pushed an image to the Docker Hub as `alexellis2/visualizer-arm:latest` it will run the code on an ARMv6 or ARMv7 device such as the Raspberry Pi.
-
-```
-$ docker service create \
-  --name=viz \
-  --publish=8080:8080/tcp \
-  --constraint=node.role==manager \
-  --mount=type=bind,src=/var/run/docker.sock,dst=/var/run/docker.sock \
-  alexellis2/visualizer-arm:latest
-```
-
-* Update/rebuild the image:
-
-If you would like to build the image from source run the following command:
-
-```
-$ docker build -t visualizer-arm:latest .
-```
-
-> Make sure you do this on a Raspberry Pi directly.
-
-[View on Docker Hub](https://hub.docker.com/r/alexellis2/visualizer-arm/tags/)
-
-## Running on Windows
-
-[@StefanScherer](https://github.com/StefanScherer) has pushed an image to the
-Docker Hub as `stefanscherer/visualizer-windows:latest` it will run the code
-in a Windows nanoserver container.
-
-If you would like to build the image from source run the following command:
-
-```
-$ docker build -f Dockerfile.windows -t visualizer-windows:latest .
-```
-
-On Windows you cannot use `-v` to bind mount the named pipe into the container.
-Your Docker engine has to listen to a TCP port, eg. 2375 and you have to
-set the `DOCKER_HOST` environment variable running the container.
-
-```
-$ip=(Get-NetIPAddress -AddressFamily IPv4 `
-   | Where-Object -FilterScript { $_.InterfaceAlias -Eq "vEthernet (HNS Internal NIC)" } `
-   ).IPAddress
-
-docker run -d -p 8080:8080 -e DOCKER_HOST=${ip}:2375 --name=visualizer stefanscherer/visualizer-windows
-```
-
-### Connect to a TLS secured Docker engine
-
-To work with a TLS secured Docker engine on Windows, set the environment variable `DOCKER_TLS_VERIFY` and
-bind mount the TLS certificates into the container.
- 
-```
-$ip=(Get-NetIPAddress -AddressFamily IPv4 `
-   | Where-Object -FilterScript { $_.InterfaceAlias -Eq "vEthernet (HNS Internal NIC)" } `
-   ).IPAddress
-
-docker run -d -p 8080:8080 -e DOCKER_HOST=${ip}:2376 -e DOCKER_TLS_VERIFY=1 -v "$env:USERPROFILE\.docker:C:\Users\ContainerAdministrator\.docker" --name=visualizer stefanscherer/visualizer-windows
-```
-
-## Building a custom image
-*When building for Windows, see [Running on Windows](#running-on-windows)*.
-
-To build an up-to-date image for any architecture supported by [node:8-alpine](https://hub.docker.com/_/node/) (currently `amd64`, `arm32v6`, `arm32v7`, `arm64v8`, `i386`, `ppc64le` and `s390x`), execute the following command on a device of your target architecture:
-```
-$ docker build -t visualizer-custom:latest .
-```
-
-Afterwards you can start visualizer by using any of the commands stated [above](#docker-swarm-visualizer). Just replace `dockersamples/visualizer` with `visualizer-custom`. For example:
-```
-$ docker run -it -d -p 8080:8080 -v /var/run/docker.sock:/var/run/docker.sock visualizer-custom
-```
-
-
-## TODO:
-* Take out or fix how dist works
-* Comment much more extensively
-* Create tests and make them work better
-* Make CSS more elastic. Currently optimized for 3 nodes on a big screen
+Test
